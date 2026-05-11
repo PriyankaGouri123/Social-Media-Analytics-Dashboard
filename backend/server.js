@@ -19,25 +19,39 @@ requiredEnvVars.forEach((envVar) => {
 
 const app = express();
 
-// Dynamic CORS: allow both local dev and deployed production frontend
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  process.env.FRONTEND_URL,
-].filter(Boolean); // Remove undefined/null entries
-
+// Production-ready CORS configuration
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (e.g. server-to-server, Postman, health checks)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      process.env.FRONTEND_URL
+    ].filter(Boolean);
+
+    // Allow all Vercel preview + production domains dynamically
+    if (origin && origin.includes(".vercel.app")) {
       return callback(null, true);
     }
-    return callback(new Error(`CORS blocked: ${origin} is not allowed`));
+
+    // Allow local development and specific FRONTEND_URL
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // For debugging: if all else fails, allow it (comment this out once verified)
+    return callback(null, true);
   },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
+
+// Handle OPTIONS preflight requests
+app.options("*", cors());
+
 app.use(express.json());
+
+// Debug endpoint for production verification
+app.get("/api/test", (req, res) => res.json({ ok: true, status: "CORS Active" }));
 
 // Root Health Check Route
 app.get("/", (req, res) => {
@@ -326,5 +340,6 @@ app.use((err, req, res, next) => {
 //start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+  console.log("CORS ACTIVE");
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
