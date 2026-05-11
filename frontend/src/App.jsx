@@ -9,12 +9,13 @@ import YT from "./components/yt";
 import IG from "./components/ig";
 import X from "./components/x";
 import About from "./components/About";
+import Home from "./components/Home";
 
 function App() {
   return (
     <Router>
       {/* ✅ Global base styles */}
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
 
         <Navbar />
 
@@ -22,21 +23,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <>
-                  <header className="p-6 text-center">
-                    <h1 className="text-3xl font-bold">
-                      Welcome to Social Media Analytics Dashboard
-                    </h1>
-                    <p className="text-muted-foreground mt-2">
-                      Track reach, followers, likes, and posts in one place
-                    </p>
-                  </header>
-
-                  <DashboardCards />
-                  <ChartsSection />
-                </>
-              }
+              element={<Home />}
             />
 
             {/* <Route path="/login" element={<Login />} /> */}

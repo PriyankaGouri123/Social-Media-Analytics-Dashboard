@@ -1,4 +1,4 @@
-import { Card, CardContent } from "./ui/card";
+import { motion } from "framer-motion";
 import { TrendingUp, Users, Eye, Video } from "lucide-react";
 
 export default function DashboardCards() {
@@ -29,42 +29,67 @@ export default function DashboardCards() {
     },
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 }
+  };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 sm:p-6 md:p-8">
+    <motion.div 
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 sm:p-6 md:p-8"
+    >
       {cards.map((card, idx) => (
-        <Card
+        <motion.div
           key={idx}
+          variants={item}
+          whileHover={{ y: -5, scale: 1.02 }}
           className="
-            p-4 sm:p-5 rounded-2xl shadow-lg 
-            backdrop-blur-md bg-white/10 dark:bg-gray-900/20 border border-white/20 dark:border-gray-700/40
-            hover:scale-105 hover:shadow-2xl transition-all duration-300
-            cursor-pointer
+            p-6 rounded-2xl shadow-lg 
+            bg-card border border-border
+            hover:shadow-2xl transition-all duration-300
+            cursor-pointer group
           "
         >
-          <CardContent className="flex flex-col items-center space-y-3 sm:space-y-4">
-
+          <div className="flex flex-col items-center space-y-4">
             {/* Icon */}
             <div
               className={`
-                p-3 sm:p-4 rounded-xl bg-gradient-to-br ${card.gradient}
-                text-black dark:text-white shadow-lg shadow-black/20
+                p-4 rounded-2xl bg-gradient-to-br ${card.gradient}
+                text-white shadow-lg shadow-black/10 group-hover:shadow-black/20
+                transition-shadow
               `}
             >
               {card.icon}
             </div>
 
-            {/* Value */}
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-black dark:text-white drop-shadow-md text-center">
-              {card.value}
-            </h2>
+            <div className="text-center">
+              {/* Value */}
+              <h2 className="text-3xl font-extrabold text-foreground drop-shadow-sm">
+                {card.value}
+              </h2>
 
-            {/* Title */}
-            <p className="text-gray-800 dark:text-gray-300 text-xs sm:text-sm tracking-wide text-center">
-              {card.title}
-            </p>
-          </CardContent>
-        </Card>
+              {/* Title */}
+              <p className="text-muted-foreground text-sm font-medium tracking-wide mt-1">
+                {card.title}
+              </p>
+            </div>
+          </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

@@ -1,19 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaInstagram, FaTwitter, FaYoutube, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
-
-  // ✅ Correct global theme application
-  useEffect(() => {
-    const root = document.documentElement; // NOT body
-    root.classList.toggle("dark", dark);
-    localStorage.setItem("theme", dark ? "dark" : "light");
-  }, [dark]);
+  const { dark, setDark } = useTheme();
 
   return (
     <nav className="bg-background text-foreground shadow-md px-6 py-4 border-b">
