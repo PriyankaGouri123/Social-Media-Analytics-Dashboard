@@ -18,8 +18,23 @@ requiredEnvVars.forEach((envVar) => {
 });
 
 const app = express();
+
+// Dynamic CORS: allow both local dev and deployed production frontend
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.FRONTEND_URL,
+].filter(Boolean); // Remove undefined/null entries
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. server-to-server, Postman, health checks)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked: ${origin} is not allowed`));
+  },
   credentials: true
 }));
 app.use(express.json());
