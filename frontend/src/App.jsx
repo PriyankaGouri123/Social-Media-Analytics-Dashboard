@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashboardCards from "./components/DashboardCards";
-import ChartsSection from "./components/ChartsSection";
+import ChartsSection from "./components/chartsSection";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import YT from "./components/yt";
