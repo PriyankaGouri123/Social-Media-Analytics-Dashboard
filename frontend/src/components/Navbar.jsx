@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between">
 
         {/* Brand */}
-        <h1 className="text-2xl font-bold">Social Dashboard</h1>
+        <h1 className="text-2xl font-bold">Social Analytics</h1>
 
         {/* Desktop Social Icons */}
         <div className="hidden md:flex items-center space-x-6 text-lg">

@@ -10,6 +10,9 @@ import IG from "./components/ig";
 import X from "./components/x";
 import About from "./components/About";
 import Home from "./components/Home";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import Support from "./pages/Support";
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
             <Route path="/youtube" element={<YT />} />
             <Route path="/instagram" element={<IG />} />
             <Route path="/twitter" element={<X />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/support" element={<Support />} />
           </Routes>
         </div>
 

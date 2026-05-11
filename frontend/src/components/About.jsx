@@ -78,9 +78,16 @@ export default function About() {
                 In an era of fragmented attention, understanding your digital footprint shouldn't be a chore. Our mission is to democratize high-level social analytics, making them accessible to everyone from the solo creator to the enterprise agency.
               </p>
               <div className="flex gap-4">
-                <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/20">
-                  Join the Waitlist
-                </button>
+                <a 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=socialanalytics.support@gmail.com&su=Waitlist%20Request%20-%20Social%20Analytics"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/20 active:scale-95">
+                    Join the Waitlist
+                  </button>
+                </a>
                 <div className="flex items-center gap-2 text-muted-foreground font-bold text-sm">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                   Live in Beta v2.4

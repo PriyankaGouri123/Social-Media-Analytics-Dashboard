@@ -21,15 +21,13 @@ export default function XStats() {
 
     try {
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/xstats/${cleanUsername}`);
-      if (res.data.success) {
+      if (res.data.success || res.data.isDemo) {
         setStats(res.data.data);
       } else {
-        setError(res.data.message || "X profile not found.");
+        setError(res.data.message || "User not found.");
       }
-    } catch (err) {
-      console.error("X Fetch Error:", err);
-      const msg = err.response?.data?.message || err.message || "Failed to connect to the analytics server.";
-      setError(msg);
+    } catch (error) {
+      setError("Failed to connect to the analytics server.");
     } finally {
       setLoading(false);
     }

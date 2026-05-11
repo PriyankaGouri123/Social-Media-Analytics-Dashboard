@@ -146,7 +146,6 @@ app.get("/api/xstats/:username", async (req, res) => {
           followers: user.public_metrics?.followers_count || 0,
           following: user.public_metrics?.following_count || 0,
           tweets: user.public_metrics?.tweet_count || 0,
-          favorites: 0, // Not provided by basic v2 user object
           verified: user.verified || false,
           created_at: user.created_at || "",
         },
