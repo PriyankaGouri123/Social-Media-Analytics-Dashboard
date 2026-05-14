@@ -99,33 +99,7 @@ APIs & Integrations
 Deployment Platforms
 - Vercel (Frontend)
 - Render (Backend)
-
-
-📂 Project Structure
-
-Social-Media-Analytics-Dashboard/
-│
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── assets/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
-│   ├── .env
-│   ├── package.json
-│   └── vite.config.js
-│
-├── backend/
-│   ├── server.js
-│   ├── .env
-│   ├── package.json
-│   └── routes/
-│
-├── .gitignore
-└── README.md
-
+  
 
 ⚙️ Environment Variables
 
