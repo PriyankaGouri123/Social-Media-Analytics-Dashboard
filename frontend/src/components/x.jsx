@@ -99,42 +99,49 @@ export default function XStats() {
                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                 </div>
 
-                <div className="px-10 pb-12 -mt-20 relative flex flex-col md:flex-row gap-10 items-end md:items-center">
-                  <div className="relative group/avatar">
-                    <img
-                      src={stats.profile_pic || "/fallback-avatar.png"}
-                      className="w-32 h-32 md:w-44 md:h-44 rounded-full border-8 border-card shadow-2xl object-cover bg-muted group-hover/avatar:scale-105 transition-transform"
-                      alt={stats.username}
-                      onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${stats.username}&background=random`; }}
-                    />
-                    {stats.verified && (
-                      <div className="absolute bottom-2 right-2 bg-blue-500 text-white p-1.5 rounded-full border-4 border-card shadow-lg">
-                        <FaCheckCircle className="text-xl" />
-                      </div>
-                    )}
-                  </div>
+                <div className="px-10 pb-12 -mt-20 relative flex flex-col md:flex-row gap-10 items-end md:items-center w-full">
+                  <a 
+                    href={`https://x.com/${stats.username}`} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="flex-1 flex flex-col md:flex-row gap-10 items-end md:items-center group/link text-left hover:no-underline"
+                  >
+                    <div className="relative group/avatar">
+                      <img
+                        src={stats.profile_pic || "/fallback-avatar.png"}
+                        className="w-32 h-32 md:w-44 md:h-44 rounded-full border-8 border-card shadow-2xl object-cover bg-muted group-hover/avatar:scale-105 group-hover/link:scale-105 transition-transform"
+                        alt={stats.username}
+                        onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${stats.username}&background=random`; }}
+                      />
+                      {stats.verified && (
+                        <div className="absolute bottom-2 right-2 bg-blue-500 text-white p-1.5 rounded-full border-4 border-card shadow-lg">
+                          <FaCheckCircle className="text-xl" />
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="flex-1 text-center md:text-left space-y-4">
-                    <div>
-                      <div className="flex flex-col md:flex-row items-center gap-3">
-                        <h2 className="text-4xl font-black text-foreground">{stats.name}</h2>
+                    <div className="flex-1 text-center md:text-left space-y-4">
+                      <div>
+                        <div className="flex flex-col md:flex-row items-center gap-3">
+                          <h2 className="text-4xl font-black text-foreground group-hover/link:text-blue-400 transition-colors">{stats.name}</h2>
+                        </div>
+                        <p className="text-muted-foreground text-xl font-bold">@{stats.username}</p>
                       </div>
-                      <p className="text-muted-foreground text-xl font-bold">@{stats.username}</p>
+                      <p className="text-muted-foreground text-lg max-w-4xl leading-relaxed font-medium">
+                        {stats.description || "Digital footprint analysis in progress."}
+                      </p>
+                      <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm font-bold text-muted-foreground">
+                         {stats.location && <span className="flex items-center gap-2"><FaMapMarkerAlt className="text-primary" /> {stats.location}</span>}
+                         {stats.created_at && <span className="flex items-center gap-2"><FaCalendarAlt className="text-primary" /> Joined {new Date(stats.created_at).getFullYear()}</span>}
+                      </div>
                     </div>
-                    <p className="text-muted-foreground text-lg max-w-4xl leading-relaxed font-medium">
-                      {stats.description || "Digital footprint analysis in progress."}
-                    </p>
-                    <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm font-bold text-muted-foreground">
-                       {stats.location && <span className="flex items-center gap-2"><FaMapMarkerAlt className="text-primary" /> {stats.location}</span>}
-                       {stats.created_at && <span className="flex items-center gap-2"><FaCalendarAlt className="text-primary" /> Joined {new Date(stats.created_at).getFullYear()}</span>}
-                    </div>
-                  </div>
+                  </a>
                   
                   <a 
                     href={`https://x.com/${stats.username}`} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="p-4 bg-foreground text-background rounded-2xl hover:scale-110 transition-transform shadow-xl mb-4"
+                    className="p-4 bg-foreground text-background rounded-2xl hover:scale-110 transition-transform shadow-xl mb-4 self-center md:self-end shrink-0"
                   >
                     <FaExternalLinkAlt />
                   </a>
